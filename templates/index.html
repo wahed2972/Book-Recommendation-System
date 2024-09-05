@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: black;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: #00a65a;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 10px 15px;
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.5em;
+        color: white !important;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    .navbar a {
+        color: white !important;
+    }
+
+    .navbar a:hover {
+        color: #ccc !important;
+    }
+
+    .hero {
+        background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-creative-synthesis-simple-book-education-and-training-background-image_219497.jpg'); /* Replace with your image URL */
+        background-size: cover;
+        background-position: center;
+        padding: 100px 0;
+        text-align: center;
+        height: 100vh;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        font-weight: 700;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        margin: 0;
+    }
+
+    .hero p {
+        font-size: 20px;
+        font-weight: 300;
+        margin-top: 10px;
+    }
+
+    .card {
+        background-color: #2a2a2a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        height: 550px; /* Increased height */
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card img {
+        height: 350px; /* Increased image height */
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .card-body p {
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-bottom: 10px;
+    }
+
+    footer {
+        background-color: #1a1a1a;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    footer a {
+        color: #00a65a;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    footer a:hover {
+        color: #ccc;
+    }
+</style>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV-bODW97nphIeKeaaKeDhe6BQ-9I_bFyDUQ&s" alt="Logo"> <!-- Replace with your logo URL -->
+            <span>My Book Recommender</span>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a>Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Discover Your Next Favorite Book</h1>
+        <p>Explore top-rated books tailored just for you</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-white" style="font-size:50px; margin-top:50px;">Top 50 Books</h1>
+            </div>
+
+            {% for i in range(book_name|length) %}
+                <div class="col-md-3" style="margin-top:50px">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ image[i] }}">
+                        <div class="card-body">
+                            <p>{{ book_name[i] }}</p>
+                            <h4>{{ author[i] }}</h4>
+                            <h4>Votes - {{ votes[i] }}</h4>
+                            <h4>Rating - {{ rating[i] | round(2) }}</h4>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Connect with us: 
+            <a href="#">Facebook</a> | 
+            <a href="#">Twitter</a> | 
+            <a href="#">Instagram</a>
+        </p>
+        <p>&copy; 2024 My Book Recommender. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

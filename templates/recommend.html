@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #00a65a;
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: white !important;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .navbar a {
+            color: white !important;
+        }
+
+        .navbar a:hover {
+            color: #ccc !important;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            height: 550px;
+            transition: transform 0.2s ease-in-out;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            height: 350px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card-body p {
+            max-height: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #00a65a;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #ccc;
+        }
+
+        .main-header {
+            margin-top: 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV-bODW97nphIeKeaaKeDhe6BQ-9I_bFyDUQ&s" alt="Logo"> 
+                    My Book Recommender
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-header">
+            <h1 style="font-size:50px;">Recommend Books</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form action="/recommend_books" method="post" class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="user_input" placeholder="Enter a book title" required>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-warning">Recommend</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Error message if no book is found -->
+        {% if error_message %}
+        <div class="error-message">
+            <p>{{ error_message }}</p>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-md-3" style="margin-top:50px;">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ i[2] }}" alt="Book Image">
+                            <div class="card-body">
+                                <h4>{{ i[0] }}</h4>
+                                <p>{{ i[1] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Connect with us:
+            <a href="#">Facebook</a> | 
+            <a href="#">Twitter</a> | 
+            <a href="#">Instagram</a>
+        </p>
+        <p>&copy; 2024 My Book Recommender. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
